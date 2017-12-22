@@ -14,7 +14,7 @@ global.token = process.env.TOKEN || null;
 global.config_key = "git2consul/config";
 
 // adding common.properties as global variables
-global.gproperties = "/home/gitlab-runner/common.properties"
+global.gproperties = "/tmp"
 
 for (var i=2; i<process.argv.length; ++i) {
     if(process.argv[i] === '-s' || process.argv[i] === '--secure') global.secure = true;
