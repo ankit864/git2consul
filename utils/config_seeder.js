@@ -13,6 +13,9 @@ global.secure = process.env.CONSUL_SECURE || false;
 global.token = process.env.TOKEN || null;
 global.config_key = "git2consul/config";
 
+// adding common.properties as global variables
+global.gproperties = "/home/gitlab-runner/common.properties"
+
 for (var i=2; i<process.argv.length; ++i) {
     if(process.argv[i] === '-s' || process.argv[i] === '--secure') global.secure = true;
 
@@ -38,6 +41,14 @@ for (var i=2; i<process.argv.length; ++i) {
         process.exit(3);
       }
       global.config_key = process.argv[i+1];
+    }
+    // adding global properties -ankit
+    if(process.argv[i] === '-g' || process.argv[i] === '--gproperties' || process.argv[i] === '--gproperties') {
+      if(i+1 >= process.argv.length) {
+        logger.error("No --gproperties name provided with --config-key option");
+        process.exit(3);
+      }
+      global.gproperties = process.argv[i+1];
     }
 }
 
